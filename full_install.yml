@@ -235,3 +235,13 @@
       var: join_command_local.msg
   - name: join agents to cluster
     command: "{{ join_command_local.msg }}"
+
+- hosts: all
+  remote_user: ssaid
+  tags: post_install
+  tasks:
+  - name: Setup aliases
+    ansible.builtin.blockinfile:
+      path: ~/.bashrc
+      block: |
+        alias k='kubectl' 
