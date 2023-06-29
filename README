@@ -1,0 +1,19 @@
+This assumes you have deployed the hosts declared in ansible-hosts.txt
+
+So to bootstrap the cluster issue:
+ansible-playbook -i ansible-hosts.txt full-install.yml
+
+--
+Notes:
+1. The CNI used here is calico
+2. The cluster is deployed on ubuntu jammy release
+3. My username is used, change it for yours.
+--
+Dashboard
+This includes the k8s dashboard so deploy the rbac.yaml to generate the resources.
+After deploying issue this:
+kubectl -n kubernetes-dashboard create token admin-user
+Use the previous token to access the dashboard after doing this
+ssh -L 8001:127.0.0.1:8001 server
+kubectl proxy
+http://localhost:8008/api/v1/namespaces/kubernetes-dashboard/services/https:kubernetes-dashboard:/proxy/

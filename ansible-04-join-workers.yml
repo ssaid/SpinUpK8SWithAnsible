@@ -1,0 +1,18 @@
+- hosts: kube_agents
+  become: true
+  remote_user: ssaid
+  vars_files:
+    - ansible-vars.yml
+  tasks:
+  - name: restart docker
+    service:
+      name: containerd
+      state: restarted
+  - name: read join command
+    debug: msg={{ lookup('file', join_command_location) }}
+    register: join_command_local
+  - name: show join command
+    debug:
+      var: join_command_local.msg
+  - name: join agents to cluster
+    command: "{{ join_command_local.msg }}"
