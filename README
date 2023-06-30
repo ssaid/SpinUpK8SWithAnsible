@@ -17,3 +17,7 @@ Use the previous token to access the dashboard after doing this
 ssh -L 8001:127.0.0.1:8001 server
 kubectl proxy
 http://localhost:8008/api/v1/namespaces/kubernetes-dashboard/services/https:kubernetes-dashboard:/proxy/
+--
+Access the cluster locally
+1. Copy the /etc/kubernetes/admin.conf to your local pc
+2. Export the envvar KUBECONFIG to use that file.
