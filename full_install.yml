@@ -245,3 +245,13 @@
       path: ~/.bashrc
       block: |
         alias k='kubectl' 
+
+- hosts: kube_server
+  remote_user: ssaid
+  tags: fetch_config
+  tasks:
+  - name: Fetch the .kube/config
+    fetch:
+      src: ~/.kube/config
+      dest: ./admin.conf 
+      flat: true
